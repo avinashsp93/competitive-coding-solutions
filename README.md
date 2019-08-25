@@ -1,13 +1,13 @@
-# competitive-coding-solutions
+# Competitive Coding Solutions and Approaches
 A manual that contains concepts, solutions and approaches to competitive coding problems.
 
-# Command to create pdf from markdown/latex doc 
+## Command to create pdf from markdown/latex doc 
 ```
 pandoc .\Docs.md -s -o  Manual.pdf --pdf-engine=pdflatex
 ```
 
-Quick Links:
+## Quick Links:
 
-For Project Euler Documentation
+### For Project Euler Documentation
 https://github.com/avinashsp93/competitive-coding-solutions/blob/master/HackerRank/ProjectEuler/Manual.pdf
 
