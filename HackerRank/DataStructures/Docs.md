@@ -210,3 +210,83 @@ def deleteNode(head, position):
                 inode = inode.next
 
 \end{verbatim}
+
+\section{ 6. Reverse a linked list }
+
+The task is to reverse the elements of a linked list.
+
+This can be achieved in 2 ways.
+
+- Recursive
+
+- Iterative
+
+Here iterative method is followed for the ease of understanding.
+
+$$A -> B -> C -> D -> None$$
+
+needs to be
+
+$$None <- A <- B <- C <- D$$
+
+Initially all we care about achieving is to reverse the linkages.
+i.e., $A -> B$ should be $A <- B$
+
+The process involves, iterating through each nodes.
+
+While being on each node,
+
+- store the pointer to next node in a temporary variable
+
+- assign the pointer to the next node as previous node (None for head node)
+
+- hop on to the next node and update your previous and current nodes respectively.
+
+- next node hopping couldn't have been done if we didn't store the pointer to next node in a temporary variable. Because the pointer gets updated in the second step.
+
+\begin{verbatim}
+
+def reverse(head):
+    prev = None
+    cur = head
+    while(cur):
+        nxt = cur.next
+        cur.next = prev
+        prev = cur
+        cur = nxt
+    head = prev
+    return head
+
+\end{verbatim}
+
+
+\section{ 7. Compare two linked lists }
+
+The task is to compare two singly linked lists and they should be equal lengthwise and also all the elements should be equal.
+
+Start your iteration in a while loop, enter the while loop only if both the iterative nodes are not null.
+
+Return 0 immediately inside the loop if the data is unequal.
+
+Return 0 if only one of them nodes have next element as None. This indicates unequal length of linked lists.
+
+Increment both the nodes to its next nodes.
+
+Return 1 outside the while loop, since it indicates that the elements are equal in the linked lists if the control reaches out of while loop.
+
+
+\begin{verbatim}
+
+def compare_lists(head1, head2):
+    inode1 = head1
+    inode2 = head2
+    while(inode1 and inode2):
+        if(inode1.data != inode2.data):
+            return 0
+        if((inode1.next == None and inode2.next != None) or (inode1.next != None and inode2.next == None)):
+            return 0
+        inode1 = inode1.next
+        inode2 = inode2.next
+    return 1
+
+\end{verbatim}
