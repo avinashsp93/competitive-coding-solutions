@@ -293,6 +293,24 @@ Special care must be taken to calculate factoradic number, as the number gets bi
 
 
 \section{ 25. N-digit Fibonacci number }
+
+Task is to find the first Fibonacci number whose length is N.
+
+This technique requires the knowledge of memoization, if we can memoize efficiently, this can be solved. 
+
+We calculate all the Fibonacci number in an order, check its length, if the length of the current fibo number is greater than previous fibo number then store in a dictionary the length as key and the Fibonacci number’s occurrence number as the value. 
+
+Ex: If 12th Fibonacci number is the first Fibonacci number to have 3 digits
+Then fibo_dict[3] = 12.
+
+Python can handle really long integer addition so carry out this process till you have
+dict[5000] = 23922 or somewhere.
+
+The next steps are to just access the value whose key is user input, can be written in a single line.
+
+
+
+
 \section{ 26. Reciprocal cycles }
 \section{ 27. Quadratic primes }
 \section{ 28. Number spiral diagonals }
