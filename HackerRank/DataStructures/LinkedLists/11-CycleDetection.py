@@ -36,7 +36,7 @@ def print_singly_linked_list(node, sep, fptr):
         if node:
             fptr.write(sep)
 
-# Complete the reverse function below.
+# Complete the has_cycle function below.
 
 #
 # For your reference:
@@ -45,16 +45,18 @@ def print_singly_linked_list(node, sep, fptr):
 #     int data
 #     SinglyLinkedListNode next
 
-def reverse(head):
-    prev = None
-    cur = head
-    while(cur):
-        nxt = cur.next
-        cur.next = prev
-        prev = cur
-        cur = nxt
-    head = prev
-    return head
+def has_cycle(head):
+    if(head == None):
+        return 0
+    else:
+        slow = head
+        fast = head
+        while(fast != None and fast.next != None):
+            slow = slow.next
+            fast = fast.next.next
+            if(slow== fast):
+                return 1
+        return 0
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
@@ -62,6 +64,8 @@ if __name__ == '__main__':
     tests = int(input())
 
     for tests_itr in range(tests):
+        index = int(input())
+
         llist_count = int(input())
 
         llist = SinglyLinkedList()
@@ -70,9 +74,20 @@ if __name__ == '__main__':
             llist_item = int(input())
             llist.insert_node(llist_item)
 
-        llist1 = reverse(llist.head)
+        extra = SinglyLinkedListNode(-1);
+        temp = llist.head;
 
-        print_singly_linked_list(llist1, ' ', fptr)
-        fptr.write('\n')
+        for i in range(llist_count):
+            if i == index:
+                extra = temp
+
+            if i != llist_count-1:
+                temp = temp.next
+
+        temp.next = extra
+
+        result = has_cycle(llist.head)
+
+        fptr.write(str(int(result)) + '\n')
 
     fptr.close()

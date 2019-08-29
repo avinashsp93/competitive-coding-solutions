@@ -290,3 +290,114 @@ def compare_lists(head1, head2):
     return 1
 
 \end{verbatim}
+
+
+\section{ 8. Print in reverse }
+
+The task is to print a singly linked list in reverse order.
+
+This can be very easily done using Recursion technique.
+
+The function is called and is given the head node of the linked list.
+
+Inside this function, make a recursive call (calling the same function inside the function) till you reach the end of the linked list.
+
+At the end of the linked list when the node is none, print the node value and come out of the innermost recursive function.
+
+You will actually come to the second innermost recursive function where head is now pointing to the last but 1 element. Print it and come out of the function. 
+
+This way you keep printing the elements in the reverse order using Recursion.
+
+
+\begin{verbatim}
+
+def reversePrint(head):
+    if(head != None):
+        reversePrint(head.next)
+        print(head.data)
+
+\end{verbatim}
+
+
+\section{ 9. Get node value }
+
+The task is to get the value of a node whose position, let's call it t, from the tail is known.
+
+The trick here is to have two iterable linked list nodes, one that goes till the end of the node
+and the second one that starts its increment after the first one hops t number of times.
+
+By the time the first node reaches the end, the second node will then be lagging by t.
+That way we will get the data of the node which is t nodes back from the tail of the linked list.
+
+\begin{verbatim}
+
+def getNode(head, positionFromTail):
+    count = 0
+    node = head
+    while(head):
+        if(count > positionFromTail):
+            node = node.next
+        count+=1
+        head = head.next
+    return node.data
+
+\end{verbatim}
+
+
+\section{ 10. Delete duplicate-value nodes from a sorted linked list }
+
+The task is to delete repeated numbers from a sorted linked list.
+
+It is so tempting to use 2 different nodes to keep track and check duplicates, but it can be achieved using only one iterable node.
+
+Start with the head and loop till the end of the linked list.
+
+While doing so, check if the adjacent nodes data are equal.
+
+If so, delete the leading repeated number, you can do so by unlinking it from the chain.
+
+Otherwise increment the node and check the same condition for the next node and so on.
+
+Finally return the head of the linked list to the calling function.
+
+
+\begin{verbatim}
+
+def removeDuplicates(head):
+    inode = head
+    while(inode.next):
+        if(inode.data == inode.next.data):
+            inode.next = inode.next.next
+        else:
+            inode = inode.next
+    return head
+
+\end{verbatim}
+
+\section{ 11. Cycle Detection }
+
+The task is to detect if the linked list is cycled, i.e., if the linked list loop never ends.
+Return 0 if the linked list is open chained, 1 if it has cycle or close chained.
+
+You'll have to run 2 iterators here, once goes fast (2 hops at a time) and one goes slow (1 hop at a time).
+
+If at some point, both the iterators are pointing to the same node (not the data), then we are guaranteed to be in a cycle. Because the slower iterator will never be able to meet a faster iterator in an open chain linked list.
+
+Important thing to remember while doing this problem is to compare the actual nodes and not the data
+
+\begin{verbatim}
+
+def has_cycle(head):
+    if(head == None):
+        return 0
+    else:
+        slow = head
+        fast = head
+        while(fast != None and fast.next != None):
+            slow = slow.next
+            fast = fast.next.next
+            if(slow== fast):
+                return 1
+        return 0
+
+\end{verbatim}

@@ -27,16 +27,16 @@ class SinglyLinkedList:
 
         self.tail = node
 
-def print_singly_linked_list(node, sep, fptr):
+def print_singly_linked_list(node, sep):
     while node:
-        fptr.write(str(node.data))
+        print(node.data, end='')
 
         node = node.next
 
         if node:
-            fptr.write(sep)
+            print(sep, end='')
 
-# Complete the reverse function below.
+# Complete the reversePrint function below.
 
 #
 # For your reference:
@@ -45,20 +45,12 @@ def print_singly_linked_list(node, sep, fptr):
 #     int data
 #     SinglyLinkedListNode next
 
-def reverse(head):
-    prev = None
-    cur = head
-    while(cur):
-        nxt = cur.next
-        cur.next = prev
-        prev = cur
-        cur = nxt
-    head = prev
-    return head
+def reversePrint(head):
+    if(head != None):
+        reversePrint(head.next)
+        print(head.data)
 
 if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
-
     tests = int(input())
 
     for tests_itr in range(tests):
@@ -70,9 +62,4 @@ if __name__ == '__main__':
             llist_item = int(input())
             llist.insert_node(llist_item)
 
-        llist1 = reverse(llist.head)
-
-        print_singly_linked_list(llist1, ' ', fptr)
-        fptr.write('\n')
-
-    fptr.close()
+        reversePrint(llist.head)
